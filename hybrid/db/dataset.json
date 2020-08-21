@@ -1,1 +1,119 @@
-{"intents": {"CloseLFIntent": {"name": "close", "samples": []}, "HelpIntent": {"name": "HelpIntent", "samples": []}, "HelloWorldIntent": {"name": "saluto", "samples": ["ciao", "ei", "ao", "bella"]}, "InsultaIntent": {"name": "insulta", "samples": ["ammazzati", "vaffanculo", "scemo"]}, "TestIntent": {"name": "Test", "samples": ["scrivi questo"]}}, "skill_template": "#<0>\nimport random\nimport time\nrandom.seed(time.time())\nc=<1>\nprint(c[random.randint(0, len(c)-1)])\n", "version": "1"}
+{
+    "intents": {
+        "ExampleIntent": {
+            "syns_out": 1,
+            "name": "",
+            "samples": []
+        },
+        "CloseLFIntent": {
+            "syns_out": 1,
+            "name": "close",
+            "samples": [
+                "esci",
+                "zitta",
+                "zitto"
+            ]
+        },
+        "HelpIntent": {
+            "syns_out": 0,
+            "name": "HelpIntent",
+            "samples": [
+                "aiuto",
+                "help",
+                "cosa sai fare"
+            ],
+            "extraconts": [
+                "ciao, io sono hybrid, un IA basata sul nlp."
+            ]
+        },
+        "HelloWorldIntent": {
+            "syns_out": 1,
+            "name": "saluto",
+            "samples": [
+                "ciao",
+                "ei",
+                "ao",
+                "bella"
+            ]
+        },
+        "AvviadiscorsoIntent": {
+            "syns_out": 1,
+            "name": "avviadiscorso",
+            "samples": [
+                "eii",
+                "ei",
+                "ciao",
+                "oi"
+            ],
+            "outputs": [
+                "che fai?",
+                "come stai?",
+                "tutto ok?",
+                "tutto bene?"
+            ]
+        },
+        "AffermazionihandlerIntent": {
+            "syns_out": 1,
+            "name": "affermazioni handler",
+            "samples": [
+                "si",
+                "ok",
+                "okay",
+                "va bene",
+                "vabbene",
+                "oke",
+                "okk",
+                "yess",
+                "yes"
+            ],
+            "outputs": [
+                "ah va bene",
+                "ook"
+            ]
+        },
+        "Reply_noreask_nodialgue_handlerIntent": {
+            "syns_out": 1,
+            "name": "reply_noreask_nodialgue_handler",
+            "samples": [
+                "niente",
+                "nulla",
+                "bene"
+            ],
+            "outputs": [
+                "ah, va bene",
+                "d'accordo",
+                "okk",
+                "ook"
+            ]
+        },
+        "reply_reask_handlerIntent": {
+            "syns_out":1,
+            "name": "reply_reask_handler",
+            "samples":[],
+            "outputs":[
+                [
+                    "idem",
+                    "uguale io",
+                    "anche io"
+                ],
+                [
+                    "divertente?",
+                    "che figo",
+                    "wow"
+                ],
+                [
+                    "sono felice!",
+                    "menomale",
+                    "che bello sentirtelo dire"
+                ],
+                [
+                    "mi dispiace",
+                    "oh no",
+                    "cos'è successo?"
+                ]
+            ]
+        }
+    },
+    "skill_template": "#<0>\nimport random\nimport time\nrandom.seed(time.time())\nc=<1>\nprint(c[random.randint(0, len(c)-1)])\n",
+    "version": "1"
+}

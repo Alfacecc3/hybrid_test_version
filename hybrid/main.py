@@ -1,7 +1,7 @@
 import json
 import lib.input_processing_utils as ipu
 import lib.skill_processor as skp
-import os
+import os, sys
 
 devmode=False
 '''
@@ -12,35 +12,37 @@ so i will ask for precisely values to save them
 class IA():
     '''
     methods:
-    __init__ {
+    [F] __init__ 
         append to instance dataset and skills
         then run the main loop
-    }
-    run {
-        main loop, if devmode {
+
+    [F] run 
+        main loop, if devmode 
             on_known_input() -> skill_n.py()
             on_unknown_inp() -> input for indexname and contents
-        } elif not devmode {
+         elif not devmode 
             on_known_input() -> skill_n.py()
             on_unknown_inp() -> non ho capito, usr will repeat in other words, try to understand them.
-        }
-    }
-    do {
+
+    [F] do 
         exec the content of a skill using its first line as name.
-    }
     '''
+    
     def __init__(self):
         super().__init__()
         self.data = json.loads(open('db/dataset.json').read())
         self.skills = skp.read_skills()
-        #self.do('saluta')
+        self.do('saluta')
         while True:
             self.run()
 
     def run(self):
-        x=input('>> ').casefold()
+        x=input('>> ').casefold().rstrip()
         #è negli intent?
         found=False
+        if x.endswith('tu?'):
+            self.do('reply_reask_handler', x)
+            found=True
         for intent_key in self.data['intents']:
             if x in self.data['intents'][intent_key]['samples']:
                 try:
@@ -74,11 +76,20 @@ class IA():
             else:
                 print('scusa, non ho capito')
     
-    def do(self, w:str):
+    def do(self, w:str, x=''):
         '''
         esegui il valore di skills[w]
+        x -> intero input utente
+        y -> intero output precedente a x
         '''
-        f = lambda x:'#'+x if not x.startswith('#') else x
-        exec(self.skills[f(w)])
+        if w=='reply_reask_handler':
+            y=open('skills/latest_output.log').read()
+            script_descriptor = open("skills/skill_5.py")
+            a_script = script_descriptor.read()
+            sys.argv = ["skills/skill_5.py", x, y]
+            exec(a_script)
+        else:
+            f = lambda x:'#'+x if not x.startswith('#') else x
+            exec(self.skills[f(w)])
 
 hy=IA()
